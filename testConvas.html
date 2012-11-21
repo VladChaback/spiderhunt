@@ -2,6 +2,76 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Game_Spider</title>
+
+<style>
+* { overflow: hidden; }
+#can1{position:absolute;}
+#can2{position:absolute;}
+#menu{
+	width:1000px;
+	height:700px;
+	background-color:#CCC;
+	vertical-align:central;
+	position:absolute;
+	ruby-align:center;
+	margin-left:inherit;
+	margin-right:inherit;
+	z-index:3;
+	}
+#bPlay
+{
+	width:30%;
+	height:10%;
+	background-color:#FFF;
+	position:relative;
+	margin-top:10%;
+}
+#bSeting
+{
+	width:30%;
+	height:10%;
+	background-color:#FFF;
+	position:relative;
+	margin-top:10%;
+}
+#bHelp
+{
+	width:30%;
+	height:10%;
+	background-color:#FFF;
+	position:relative;
+	margin-top:10%;
+}
+.M_button:hover
+{
+	
+background-color:#000;
+}
+
+</style>
+</head>
+<body scroll="no">
+<canvas width="1280" height="768" id="can1" style="border:2px solid; z-index:1;">...</canvas>
+<canvas width="1280" height="768" id="can2" style="z-index:2;"></canvas>
+<div id="menu" align="center">
+<div id="bPlay" class="M_button" align="center" onclick="Play(true)"> Play </div>
+<div id="bSeting" class="M_button" >Setings</div>
+<div id="bHelp" class="M_button" >Help</div>
+
+</div>
+<script src="function.js"></script>
+<form id="form1" style="margin-top:750; position:absolute;">
+<input type="text" />
+</form>
+<textarea id="text" cols="500" rows="500" style="border:thin;"></textarea>
+
+</body>
+</html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Документ без названия</title>
 <style>
 * { overflow: hidden; }
@@ -14,7 +84,7 @@
 
 document.body.style.overflow = 'hidden';
 var N = 15; //колличество мух
-var m;
+var m;//
 var x1 = 0;
 var y1 = 700;
 var x2 = 0;
@@ -22,7 +92,7 @@ var y2 = 700;
 var iner;
 var iner1;
 var dir=0;
-var points = 0;
+var points = 0;// Очки 
 var ex = true;
 var xE = new Array();
 var yE = new Array();
