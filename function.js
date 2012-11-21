@@ -1,6 +1,6 @@
-// JavaScript Document
+﻿// JavaScript Document
 document.body.style.overflow = 'hidden';
-var pausefl = false;
+var pausefl = false;			// комментарий
 var ANet = new Array();
 var AEl = new Array(); 				//массив жуков
 var as =new Array();                // массив для атаки мух
