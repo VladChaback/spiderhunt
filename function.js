@@ -1,6 +1,6 @@
-﻿// JavaScript Document
+// JavaScript Document
 document.body.style.overflow = 'hidden';
-var pausefl = false;			// комментарий
+var pausefl = false;
 var ANet = new Array();
 var AEl = new Array(); 				//массив жуков
 var as =new Array();                // массив для атаки мух
@@ -59,31 +59,13 @@ for(i=0;i<N;i++)		// заполнение массива Жуков
 {
 AEl[i] = new beetle();
 }
-var sPl = false;
-function PauseG()
-{
-	//alert(pausefl);
-	if(pausefl == true)
-		{
-			inter = setInterval(Game,sInt);
-			pausefl=false;
-			inter2 = setInterval(atack,2000);
-		}
-	if(pausefl==false)
-	{
-		pausefl = true;
-		clearInterval(inter);
-		clearInterval(inter2);
+	
 		
-	}
 	
-}
-
 function Play(sPl)
-{
-	
+{	
 	if(sPl==true)
-	{	
+	{
 		document.getElementById('menu');			
 		menu.style.visibility = "hidden";
 		document.onkeydown = function(e) 
@@ -94,7 +76,7 @@ function Play(sPl)
 	     if (e.keyCode == 37&& speeder.x > 0){dir = 2;}
 	  		
 		 if (e.keyCode == 32)
-		  {
+			{
 				while(ANet[nN].fl==true)
 				{
 					if(nN<9)
@@ -103,27 +85,33 @@ function Play(sPl)
 					}
 					else
 					{
-						nN = 0;
-						
+						nN = 0;						
 					}
 				}
 				ANet[nN].x = speeder.x;
 				ANet[nN].y = speeder.y;	
 				ANet[nN].fl = true;	
 				points-=1;
-				}
+			}
 	return true;
-}
+		}
 		document.onkeyup = function(e)
 		{
 		   e=e||window.event;
 		   dir = 0;
 		}
-		eliensO(N,0);
-	
-	
-		inter = setInterval(Game,sInt);		
-	function nFly()
+		eliensO(N,0);	
+		inter = setInterval(Game,sInt);	
+}
+	else
+	{
+		document.getElementById('menu');			
+		menu.style.visibility = "visible";
+	}
+}//function sPlay
+
+
+function nFly()
 	{
 		for(i=0;i<10;i++)
 		{	
@@ -141,19 +129,17 @@ function Play(sPl)
 			}
 			
 	} 
-		 function Game()
-	{		
-	
-	 	zz.clearRect(0,0,w,h);
+function Game()
+{		
+	 	 zz.clearRect(0,0,w,h);
 		 nFly();
-		 
+		 check1()		 
 		 check();
-		 check1()
+		 
 		 flyB();
 		 statusBar()
 		 zz.save();
-		 eliens();		 
-		 
+		 eliens();		 	 
 		 zz.restore();
 	if(dir==1)
 		{
@@ -178,8 +164,8 @@ function Play(sPl)
 			zz.closePath();			
 	}	
 	 inter2 = setInterval(atack,2000);
-	function check() 
-	{		
+function check() 
+{		
 	
 	for(j=0;j<10;j++)
 	{
@@ -195,9 +181,9 @@ function Play(sPl)
 					ANet[j].fl = false;
 					AEl[i].fl = false;
 					m = 0;
-					for(i=0;i<N;i++)
+					for(i1=0;i1<N;i1++)
 					{
-					if(AEl[i].fl == false)
+					if(AEl[i1].fl == true)
 						{
 							m++;
 						}
@@ -205,7 +191,16 @@ function Play(sPl)
 					 points+=11;
 						if(m==0)
 						{
-							alert('!!You Win!!');
+							clearInterval(inter);
+	      					clearInterval(inter2);
+							if(confirm('!!You Win!!'))
+							{
+								Play(true);
+							}
+							else
+							{
+								Play(false);
+							}
 						}						 
 				}				  
 			}
@@ -218,10 +213,6 @@ function Play(sPl)
 		}			
 	}
 	}
-}
-
-}
-
 function eliens()
 		{
 			for(i=0;i<N;i++)
@@ -285,15 +276,13 @@ function flyB()
 {
 	
 	zz.save();
-	zz.fillStyle = '#0f0';
-	
+	zz.fillStyle = '#0f0';	
   for(i = 0;i<as.length;i++)
   {
-	  if(as[i].fl == true)
+	  if(as[i].fl != false)
 	  {
 		  as[i].y+=15;
-	 zz.fillRect(as[i].x,as[i].y,as[i].w,as[i].h)
-	
+		  zz.fillRect(as[i].x,as[i].y,as[i].w,as[i].h)	
 	  }
 	  }
   	zz.restore();
@@ -304,14 +293,12 @@ function check1()
   {
 	  if(as[i].fl == true)
 	  {
-		  if(as[i].x > speeder.x-25 && as[i].x < speeder.x+25)
+		  if(as[i].x > speeder.x-25 && as[i].x < speeder.x+75)
 		  {
 			  if(as[i].y >speeder.y-50 && as[i].y < speeder.y+100)
 			  {
-				  as[i].fl==false;
+				  as[i].fl=false;
 				  speeder.life -=1;
-				  
-				 // alert('i');
 				  if(speeder.life==0)
 				  {
 					  clearInterval(inter);
@@ -319,15 +306,13 @@ function check1()
 					  zz.save();
 					  zz.fillStyle = '#f00';
 					  zz.font = "150px Arial";
-					  zz.fillText('GAME OVER',200,200);
-					  
+					  zz.fillText('GAME OVER',200,200);					  
 					  zz.restore();
 				  }
 			  }
 		  }
 		  if(as[i].y > 800)
 		  {
-			  //as[i].y = 0;
 			  as[i].fl = false;
 		  }
 	  }
@@ -349,4 +334,25 @@ function statusBar()
 			 x1-=30;
 		 }
 		 zz.restore();
+}
+function PauseG()
+{
+		if(pausefl == true)
+		{
+			inter2 = setInterval(atack,2000);
+			pausefl=false;
+			inter = setInterval(Game,sInt);
+			
+			
+		}
+		else{
+	if(pausefl==false)
+	{
+		pausefl = true;
+		clearInterval(inter);
+		clearInterval(inter2);
+		
+	}
+	}
+	
 }
